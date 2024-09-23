@@ -133,3 +133,58 @@ span.mala-posicion {
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* Centrar el contenido de la pantalla */
+.pantalla-intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+
+.intro-box {
+  background-color: rgba(0, 0, 0, 0.2); /* Fondo casi transparente */
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.titulo-3d, .subtitulo-3d {
+  color: yellow;
+  text-shadow: 2px 2px 0 #000, 4px 4px 0 #333; /* Efecto 3D */
+  margin: 10px 0;
+}
+
+.titulo-3d {
+  font-size: 2.5rem; /* Tamaño de fuente más grande para el h1 */
+}
+
+.subtitulo-3d {
+  font-size: 1.8rem; /* Tamaño más pequeño para el h2 */
+}
+
+.boton-intro {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton-intro:hover {
+  background-color: #45a049;
+}
+
+.instrucciones-modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  margin-top: 20px;
+}
