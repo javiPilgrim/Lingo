@@ -118,7 +118,7 @@ function App() {
 
       if (nuevaPuntuacion[jugadorActual] >= 3) {
         alert(`¡Jugador ${jugadorActual} ha ganado el juego!`);
-        resetGame();
+        setPantallaActual('intro');
         return;
       }
       resetRound();
