@@ -125,14 +125,38 @@ span.mala-posicion {
 
 .popup {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #333;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro para el popup */
   color: white;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000; /* Para asegurarse de que esté por encima de otros elementos */
+  text-align: center;
 }
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.popup-image {
+  margin-top: 10px;
+  max-width: 150px; /* Ajusta el tamaño de la imagen */
+  height: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
 
 /* Centrar el contenido de la pantalla */
 .pantalla-intro {

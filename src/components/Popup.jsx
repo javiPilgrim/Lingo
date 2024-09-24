@@ -1,16 +1,16 @@
 import React from 'react';
 
-const Popup = ({ mensaje, mostrar, onClose }) => {
+const Popup = ({ mensaje, mostrar, imagen }) => {
   return (
-    mostrar && (
-      <div className="popup-overlay">
-        <div className="popup-content">
-          <h2>{mensaje}</h2>
-          <img src="trofeo.jpg" alt="¡Ganaste!" style={{ width: '100px' }} />
-        </div>
+    <div className={`popup ${mostrar ? 'visible' : 'hidden'}`}>
+      <div className="popup-content">
+        <p>{mensaje}</p>
+        {imagen && <img src={imagen} alt="popup visual" className="popup-image" />}
       </div>
-    )
+    </div>
   );
 };
 
 export default Popup;
+
+
