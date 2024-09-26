@@ -2,52 +2,7 @@ import React, { useState, useEffect } from 'react';
 import LetterBox from './components/LetterBox';
 import Popup from './components/Popup';
 
-const palabras = ['LAPIZ', 'JUEGO', 'PIZZA', 'AVION', 'RATON', 'CANTO', 'NIEVE', 'BEBER', 'CAJON', 'CARNE',
-  'CARTA', 'DOLOR', 'HUEVO', 'LECHE', 'SELVA', 'PLUMA', 'TIERRA', 'MONTE', 'GATOS', 'BRAZO',
-  'NIÑO', 'VISTA', 'TORRE', 'ARBOL', 'RIEGO', 'NARIZ', 'CALOR', 'PIEZA', 'NIEVE', 'VIAJE',
-  'BOSQUE', 'FRUTA', 'PLATO', 'CAMPO', 'VERDE', 'NOCHE', 'HOGAR', 'ACTOR', 'CAMPA', 'FUEGO',
-  'TEMOR', 'CABRA', 'BARRA', 'TECHO', 'CIEGO', 'AMIGO', 'CESTA', 'CASCO', 'CLAVE', 'MEDIA',
-  'CAIDA', 'BOTON', 'RANGO', 'ZORRO', 'BOLSA', 'FLOJO', 'CREMA', 'COLON', 'CALLE', 'FONDO',
-  'TRONO', 'FALDA', 'SALTO', 'SALUD', 'DUCHA', 'LABIO', 'RUEDA', 'CARRO', 'BARRA',
-  'PERLA', 'JAULA', 'FRASE', 'MANGO', 'MARCO', 'SILLA', 'CURVA', 'MANOS', 'METAL', 'PIEZA',
-  'NUEVO', 'HORNO', 'MORAL', 'RANGO', 'BELLA', 'ROMAN', 'BESOS', 'LIMON',
-  'RUIDO', 'SUEÑO', 'DUENO', 'SOLAR', 'FAROL', 'TOQUE', 'HUMOR', 'PASAR', 'CIEGO', 'MUELA',
-  'MANTO',  'MANOS', 'FIRME', 'VUELO', 'NEGRO', 'TENAZ', 'CAIDO',
-  'LLAVE', 'RUINA', 'HABLA', 'RIGOR', 'TITAN', 'FLACO', 'FRENO',
-  'SALVA', 'PULSO', 'CLARO', 'NACER', 'JABON', 'NECIO', 'BANDA', 'MIRAR',
-  'BAJAR', 'NIEVE', 'CORRE', 'MODAL', 'TOROS', 'BRAZO', 'TRAMA', 'CUERO',
-  'SALMO', 'PESAR', 'CINCO', 'BAILE', 'CUOTA', 'FUEGO', 'FRUTA', 'VELOZ', 'TRUCO', 'PARTE',
-  'GUIAR', 'MARCA', 'BOLSO', 'TASCA', 'CAUSA', 'BOLSA', 'ASADO', 'RODAR', 'USADO', 'PANAL',
-  'MITOS', 'RAMOS', 'SUEÑO', 'GUSTO', 'CAVAR', 'BARBA', 'ESTAR', 'MUSGO', 'LARGO', 'JABON',
-  'TEXTO', 'BASAL', 'MAGIA', 'GALLO', 'PARTO', 'SILLA', 'ROCIN', 'PLANO', 'HABIL', 'LLAMA',
-  'COLAS', 'RABIA', 'GATOS', 'SIGLO', 'ODIO', 'LUZCA', 'FRASE', 'BRUMA', 'FALDA', 'ROMBO',
-  'BROTE', 'TUMBA', 'SARTA', 'ROSCA', 'NOGAL', 'BALSA', 'NUEVO', 'SALDO', 'GOLFO', 'LUCHA',
-  'TELON', 'TANGO', 'BRAVO', 'ORINA', 'COCHE', 'PRIOR', 'VATER', 'GRIFO', 'ALTOS', 'SANTO',
-  'BRUMA', 'CORTE', 'LANZA', 'FOLLO', 'FONDO', 'GUION', 'CEBRA', 'RONCO', 'BESAR', 'RITMO',
-  'HORCA', 'CUIDA', 'HOTEL', 'MOTEL', 'BURRO', 'FIBRA', 'SOLEO', 'TERMA', 'TERMO', 'GAFAS',
-  'OZONOR', 'LUCES', 'VAINA', 'BRISA', 'VISTA', 'CRUDA', 'DUQUE', 'NIETO', 'RADIO', 'MONTE',
-  'BATIR', 'TEJER', 'NACER', 'FRUTA', 'MORAL', 'ANDAR', 'MUCHO', 'TROZO', 'BOLSO', 'FANGO',
-  'SALVA', 'ROLLO', 'HUESO', 'RUTAS', 'LIMBO', 'MOLER', 'TOMAR', 'LISTO', 'BOINA', 'UNION',
-  'MOTOR', 'CLASE', 'FINCA', 'SOBRE', 'FLUIR', 'VELAR', 'SACAR', 'PAUSA', 'PUNTO', 'FAROL',
-  'HACER', 'NIVEL', 'CALVO', 'DEBER', 'FANGO', 'BROTE', 'CERCA', 'VISTA', 'UNION', 'CANAL',
-  'FINCA', 'FELIZ', 'HACER', 'FOLIO', 'DUELO', 'EXTRA', 'GUSTO', 'PLUMA', 'YERNO', 'RUIDO',
-  'ROBOT', 'FALDA', 'HACIA', 'BEBER', 'YUNTA', 'CEBRA', 'MORAL', 'FIRMA', 'CLIMA', 'FLORO',
-  'LINCE', 'FIRME', 'LUZCA', 'TIGRE', 'TIBIO', 'RINDE', 'DURAR', 'VALER', 'BURLA', 'GRITA',
-  'BANDA', 'TENOR', 'RUIDO', 'CONDE', 'TURNO', 'PODER', 'VELAR', 'BROTE', 'TALLA', 'RADIO',
-  'SABER', 'PRISA', 'JALEO', 'TINTE', 'SODIO', 'MOLER', 'CIRCO', 'COMER', 'FLACO', 'GRATA',
-  'TURCO', 'MIMAR', 'CLAVE', 'GRUPO', 'VUELA', 'JUGAR', 'SILLA', 'PILAR', 'MONTA', 'ANCHO',
-  'LLAMA', 'FRITO', 'HELAR', 'PLUMA', 'HUMOR', 'CERDO', 'RUEDA', 'FIRME', 'TALLO', 'HORNO',
-  'FUGAS', 'BORDE', 'PESTO', 'RONCO', 'BESAR', 'PAREO', 'AGUJA', 'CLIMA', 'FUEGO', 'VELAR',
-  'TORRE', 'BICHO', 'PLATA', 'PONER', 'FONDO', 'COSTA', 'FLORA', 'MUDAR', 'FLACO', 'CENIZ',
-  'RUMOR', 'TRAER', 'DOLOR', 'FRESA', 'BRISA', 'PIANO', 'FIRMA', 'FONDA', 'DUCHA', 'BALSA',
-  'PESTE', 'MOCHO', 'BRUTO', 'FINCA', 'RADIO', 'POLEO', 'OSADO', 'FUSIL', 'CEBRA', 'CORTE',
-  'TURNO', 'CORVO', 'BROTE', 'ZORRO', 'MOVER', 'VITRO', 'RUEDA', 'MOLER', 'PERRO', 'SALDO',
-  'METRO', 'BORDE', 'TERCO', 'MIEDO', 'COSTA', 'FELIZ', 'CLIMA', 'VELON', 'GORRO', 'SUAVE',
-  'PIEZA', 'IDEAL', 'HUESO', 'NASAL', 'GRASA', 'ROBAR', 'TALON', 'FONDO', 'GORRA', 'NUEVO',
-  'UNION', 'MUECA', 'FALLO', 'CANAL', 'NIVEL', 'BAJAR', 'FALDA', 'SILLA', 'ROMBO', 'COCHE',
-  'HERIR', 'RONDA', 'BERRO', 'PANAL', 'CRUDA', 'PAREO', 'COMER', 'PODER', 'BROTE', 'VIDRIO',
-  'CLIMA', 'BALSA', 'HORNO', 'BOLSA', 'RUEDA', 'VIEJA', 'GOLPE', 'TECLA', 'FONDO', 'GAFAS',
-  'TURNO',]; 
+const palabras = ['LAPIZ', 'JUEGO', 'PIZZA', 'AVION', 'RATON'];
 
 function App() {
   const [pantallaActual, setPantallaActual] = useState('intro');
@@ -60,26 +15,27 @@ function App() {
   const [mostrarPopup, setMostrarPopup] = useState(false);
   const [mensajePopup, setMensajePopup] = useState('');
   const [mostrarInstrucciones, setMostrarInstrucciones] = useState(false);
+  
+  const [modoDeJuego, setModoDeJuego] = useState(''); // Nuevo estado para el modo de juego
+  const [aciertos, setAciertos] = useState(0);  // Contador de aciertos para un jugador
+  const [fallos, setFallos] = useState(0);      // Contador de fallos para un jugador
 
   const maxIntentos = 5;
-  const [audio, setAudio] = useState(null); // Estado para gestionar el audio
+  const [audio, setAudio] = useState(null);
 
   useEffect(() => {
-    // Cargar el archivo de audio cuando la app se monta
-    const audioFile = new Audio('aplausos.mp3'); // Asegúrate de que la ruta sea correcta
+    const audioFile = new Audio('aplausos.mp3');
     setAudio(audioFile);
   }, []);
 
   useEffect(() => {
     if (mostrarPopup) {
-      // Reproducir el audio cuando el popup se muestra
       if (audio) {
         audio.play();
       }
-
       const timer = setTimeout(() => {
         setMostrarPopup(false);
-      }, 5000); // Oculta el popup después de 5 segundos
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
@@ -109,29 +65,57 @@ function App() {
     const nuevosIntentos = [...intentos];
     nuevosIntentos[intentoActual] = nuevoIntento;
     setIntentos(nuevosIntentos);
-
+  
     if (inputPalabra === palabraSecreta) {
-      const nuevaPuntuacion = { ...puntuaciones, [jugadorActual]: puntuaciones[jugadorActual] + 1 };
-      setPuntuaciones(nuevaPuntuacion);
-      setMensajePopup(`¡Jugador ${jugadorActual} ha adivinado la palabra!`);
-      setMostrarPopup(true); // Mostrar el popup y reproducir el audio
-
-      if (nuevaPuntuacion[jugadorActual] >= 3) {
-        alert(`¡Jugador ${jugadorActual} ha ganado el juego!`);
-        setPantallaActual('intro');
-        resetGame();
-
-        return;
+      if (modoDeJuego === 'unJugador') {
+        setAciertos(aciertos + 1);
+        setMensajePopup('¡Has acertado la palabra!');
+        setMostrarPopup(true);  // Mostrar el popup cuando acierte
+        if (audio) {
+          audio.play();  // Reproducir audio al acertar la palabra
+        }
+        
+        if (aciertos + 1 >= 3) {
+          alert('¡Has ganado el juego!');
+          setPantallaActual('intro');
+          resetGame();
+          return;
+        }
+      } else {
+        const nuevaPuntuacion = { ...puntuaciones, [jugadorActual]: puntuaciones[jugadorActual] + 1 };
+        setPuntuaciones(nuevaPuntuacion);
+        setMensajePopup(`¡Jugador ${jugadorActual} ha adivinado la palabra!`);
+        setMostrarPopup(true);
+  
+        if (nuevaPuntuacion[jugadorActual] >= 3) {
+          alert(`¡Jugador ${jugadorActual} ha ganado el juego!`);
+          setPantallaActual('intro');
+          resetGame();
+          return;
+        }
       }
       resetRound();
     } else if (intentoActual + 1 >= maxIntentos) {
-      alert(`¡Se acabaron los intentos! La palabra era ${palabraSecreta}.`);
+      if (modoDeJuego === 'unJugador') {
+        setFallos(fallos + 1);
+        if (fallos + 1 >= 3) {
+          alert('¡Has perdido el juego!');
+          setPantallaActual('intro');
+          resetGame();
+          return;
+        }
+        alert(`¡Se acabaron los intentos! La palabra era ${palabraSecreta}.`);
+      } else {
+        alert(`¡Se acabaron los intentos! La palabra era ${palabraSecreta}.`);
+      }
       resetRound();
     } else {
       setIntentoActual(intentoActual + 1);
-      cambiarTurno();
+      if (modoDeJuego === 'dosJugadores') {
+        cambiarTurno();
+      }
     }
-
+  
     setInputPalabra('');
   };
 
@@ -143,11 +127,15 @@ function App() {
     setIntentos(Array(5).fill(Array(5).fill({ letra: '', estado: '' })));
     setIntentoActual(0);
     setPalabraSecreta(palabras[Math.floor(Math.random() * palabras.length)]);
-    cambiarTurno();
+    if (modoDeJuego === 'dosJugadores') {
+      cambiarTurno();
+    }
   };
 
   const resetGame = () => {
     setPuntuaciones({ 1: 0, 2: 0 });
+    setAciertos(0); // Reiniciar aciertos
+    setFallos(0);   // Reiniciar fallos
     resetRound();
   };
 
@@ -178,14 +166,26 @@ function App() {
     return (
       <div className="App">
         <div className="header">
-          <div className={`jugador jugador1 ${jugadorActual === 2 ? 'jugador-inactivo' : ''}`}>
-            <h3>Jugador 1</h3>
-            <p>Puntos: {puntuaciones[1]}</p>
-          </div>
-          <div className={`jugador jugador2 ${jugadorActual === 1 ? 'jugador-inactivo' : ''}`}>
-            <h3>Jugador 2</h3>
-            <p>Puntos: {puntuaciones[2]}</p>
-          </div>
+          {modoDeJuego === 'dosJugadores' ? (
+            <>
+              <div className={`jugador jugador1 ${jugadorActual === 2 ? 'jugador-inactivo' : ''}`}>
+                <h3>Jugador 1</h3>
+                <p>Puntos: {puntuaciones[1]}</p>
+              </div>
+              <div className={`jugador jugador2 ${jugadorActual === 1 ? 'jugador-inactivo' : ''}`}>
+                <h3>Jugador 2</h3>
+                <p>Puntos: {puntuaciones[2]}</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="jugador">
+                <h3>Un Jugador</h3>
+                <p>Aciertos: {aciertos}</p>
+                <p>Fallos: {fallos}</p>
+              </div>
+            </>
+          )}
         </div>
 
         <h2 className="titulo">La Palabra Escondida</h2>
@@ -210,12 +210,18 @@ function App() {
             onChange={handleInputChange}
             placeholder="Escribe tu palabra"
           />
-          <button onClick={checkPalabra}>Comprobar palabra</button>
+          <button onClick={checkPalabra}>Probar palabra</button>
         </div>
 
-        <Popup mensaje={mensajePopup} mostrar={mostrarPopup} imagen="/trofeo.jpg" />
+        {mostrarPopup && <Popup mensaje={mensajePopup} />}
       </div>
     );
+  };
+
+  const handlePantallaIntro = (modo) => {
+    setModoDeJuego(modo);  // Establecer el modo de juego (un jugador o dos jugadores)
+    setPantallaActual('juego');
+    resetGame();
   };
 
   const mostrarPantallaIntro = () => (
@@ -224,8 +230,8 @@ function App() {
         <h1 className="titulo-3d">Bienvenido a LINGO.</h1>
         <h2 className="subtitulo-3d">El juego de la Palabra Escondida</h2>
         <div className="botones-intro">
-          <button className="boton-intro" onClick={() => alert('Modo un jugador aún no disponible')}>Un Jugador</button>
-          <button className="boton-intro" onClick={() => setPantallaActual('juego')}>Dos Jugadores</button>
+          <button className="boton-intro" onClick={() => handlePantallaIntro('unJugador')}>Un Jugador</button>
+          <button className="boton-intro" onClick={() => handlePantallaIntro('dosJugadores')}>Dos Jugadores</button>
           <button className="boton-intro" onClick={() => setMostrarInstrucciones(true)}>Ver Instrucciones</button>
         </div>
   
@@ -245,15 +251,8 @@ function App() {
       </div>
     </div>
   );
-  
 
-  return (
-    <div>
-      {pantallaActual === 'intro' && mostrarPantallaIntro()}
-      {pantallaActual === 'juego' && mostrarPantallaJuego()}
-    </div>
-  );
+  return pantallaActual === 'intro' ? mostrarPantallaIntro() : mostrarPantallaJuego();
 }
 
 export default App;
-
