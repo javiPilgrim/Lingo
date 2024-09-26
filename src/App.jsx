@@ -179,10 +179,12 @@ function App() {
             </>
           ) : (
             <>
-              <div className="jugador">
+              <div className="unjugador">
                 <h3>Un Jugador</h3>
-                <p>Aciertos: {aciertos}</p>
-                <p>Fallos: {fallos}</p>
+                <div className="stats">
+                  <p className="aciertos">Aciertos: {aciertos}</p>
+                  <p className="fallos">Fallos: {fallos}</p>
+                </div>
               </div>
             </>
           )}

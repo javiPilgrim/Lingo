@@ -12,6 +12,7 @@ body {
   background-color: rgba(0, 0, 0, 0.5); /* Oscurecimiento ligero para contraste */
 }
 
+
 .App {
   text-align: center;
   padding: 20px;
@@ -27,6 +28,75 @@ body {
   justify-content: space-between;
   margin-bottom: 20px;
 }
+
+.unjugador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.3); /* Fondo semitransparente para destacar la sección */
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.unjugador h3 {
+  align-items: center;
+  font-size: 2.5rem; /* Tamaño de fuente más grande */
+  color: #fff; /* Cambiar color a blanco */
+  background: linear-gradient(90deg, #FF6347, #FF4500); /* Gradiente llamativo */
+  -webkit-background-clip: text; /* Efecto de gradiente en el texto */
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra en el texto para darle profundidad */
+  margin-bottom: 5px;
+}
+
+.unjugador .stats {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
+  border-radius: 15px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra interna */
+  margin-bottom: 20px;
+}
+
+.unjugador .stats p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem; /* Ajustar el tamaño de las letras */
+  color: #fff; /* Cambiar color del texto */
+  margin: 0 15px;
+}
+
+.unjugador .stats .aciertos {
+  color: #32CD32; /* Verde para aciertos */
+}
+
+.unjugador .stats .fallos {
+  color: #FF4500; /* Naranja para fallos */
+}
+
+.unjugador .stats .aciertos:before,
+.unjugador .stats .fallos:before {
+  content: '';
+  display: block;
+  width: 140px;
+  height: 20px;
+  background-size: contain;
+  margin-bottom: 10px;
+}
+
+.unjugador .stats .aciertos:before {
+  background-image: url('check-icon.png'); /* Icono para aciertos */
+}
+
+.unjugador .stats .fallos:before {
+  background-image: url('cross-icon.png'); /* Icono para fallos */
+}
+
 
 .jugador {
   padding: 10px;
