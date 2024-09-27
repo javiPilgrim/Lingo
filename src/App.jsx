@@ -2,7 +2,52 @@ import React, { useState, useEffect } from 'react';
 import LetterBox from './components/LetterBox';
 import Popup from './components/Popup';
 
-const palabras = ['LAPIZ', 'JUEGO', 'PIZZA', 'AVION', 'RATON'];
+const palabras = ['LAPIZ', 'JUEGO', 'PIZZA', 'AVION', 'RATON', 'CANTO', 'NIEVE', 'BEBER', 'CAJON', 'CARNE',
+  'CARTA', 'DOLOR', 'HUEVO', 'LECHE', 'SELVA', 'PLUMA', 'TIERRA', 'MONTE', 'GATOS', 'BRAZO',
+  'NIÑO', 'VISTA', 'TORRE', 'ARBOL', 'RIEGO', 'NARIZ', 'CALOR', 'PIEZA', 'NIEVE', 'VIAJE',
+  'BOSQUE', 'FRUTA', 'PLATO', 'CAMPO', 'VERDE', 'NOCHE', 'HOGAR', 'ACTOR', 'CAMPA', 'FUEGO',
+  'TEMOR', 'CABRA', 'BARRA', 'TECHO', 'CIEGO', 'AMIGO', 'CESTA', 'CASCO', 'CLAVE', 'MEDIA',
+  'CAIDA', 'BOTON', 'RANGO', 'ZORRO', 'BOLSA', 'FLOJO', 'CREMA', 'COLON', 'CALLE', 'FONDO',
+  'TRONO', 'FALDA', 'SALTO', 'SALUD', 'DUCHA', 'LABIO', 'RUEDA', 'CARRO', 'BARRA',
+  'PERLA', 'JAULA', 'FRASE', 'MANGO', 'MARCO', 'SILLA', 'CURVA', 'MANOS', 'METAL', 'PIEZA',
+  'NUEVO', 'HORNO', 'MORAL', 'RANGO', 'BELLA', 'ROMAN', 'BESOS', 'LIMON',
+  'RUIDO', 'SUEÑO', 'DUENO', 'SOLAR', 'FAROL', 'TOQUE', 'HUMOR', 'PASAR', 'CIEGO', 'MUELA',
+  'MANTO',  'MANOS', 'FIRME', 'VUELO', 'NEGRO', 'TENAZ', 'CAIDO',
+  'LLAVE', 'RUINA', 'HABLA', 'RIGOR', 'TITAN', 'FLACO', 'FRENO',
+  'SALVA', 'PULSO', 'CLARO', 'NACER', 'JABON', 'NECIO', 'BANDA', 'MIRAR',
+  'BAJAR', 'NIEVE', 'CORRE', 'MODAL', 'TOROS', 'BRAZO', 'TRAMA', 'CUERO',
+  'SALMO', 'PESAR', 'CINCO', 'BAILE', 'CUOTA', 'FUEGO', 'FRUTA', 'VELOZ', 'TRUCO', 'PARTE',
+  'GUIAR', 'MARCA', 'BOLSO', 'TASCA', 'CAUSA', 'BOLSA', 'ASADO', 'RODAR', 'USADO', 'PANAL',
+  'MITOS', 'RAMOS', 'SUEÑO', 'GUSTO', 'CAVAR', 'BARBA', 'ESTAR', 'MUSGO', 'LARGO', 'JABON',
+  'TEXTO', 'BASAL', 'MAGIA', 'GALLO', 'PARTO', 'SILLA', 'ROCIN', 'PLANO', 'HABIL', 'LLAMA',
+  'COLAS', 'RABIA', 'GATOS', 'SIGLO', 'ODIO', 'LUZCA', 'FRASE', 'BRUMA', 'FALDA', 'ROMBO',
+  'BROTE', 'TUMBA', 'SARTA', 'ROSCA', 'NOGAL', 'BALSA', 'NUEVO', 'SALDO', 'GOLFO', 'LUCHA',
+  'TELON', 'TANGO', 'BRAVO', 'ORINA', 'COCHE', 'PRIOR', 'VATER', 'GRIFO', 'ALTOS', 'SANTO',
+  'BRUMA', 'CORTE', 'LANZA', 'FOLLO', 'FONDO', 'GUION', 'CEBRA', 'RONCO', 'BESAR', 'RITMO',
+  'HORCA', 'CUIDA', 'HOTEL', 'MOTEL', 'BURRO', 'FIBRA', 'SOLEO', 'TERMA', 'TERMO', 'GAFAS',
+  'OZONOR', 'LUCES', 'VAINA', 'BRISA', 'VISTA', 'CRUDA', 'DUQUE', 'NIETO', 'RADIO', 'MONTE',
+  'BATIR', 'TEJER', 'NACER', 'FRUTA', 'MORAL', 'ANDAR', 'MUCHO', 'TROZO', 'BOLSO', 'FANGO',
+  'SALVA', 'ROLLO', 'HUESO', 'RUTAS', 'LIMBO', 'MOLER', 'TOMAR', 'LISTO', 'BOINA', 'UNION',
+  'MOTOR', 'CLASE', 'FINCA', 'SOBRE', 'FLUIR', 'VELAR', 'SACAR', 'PAUSA', 'PUNTO', 'FAROL',
+  'HACER', 'NIVEL', 'CALVO', 'DEBER', 'FANGO', 'BROTE', 'CERCA', 'VISTA', 'UNION', 'CANAL',
+  'FINCA', 'FELIZ', 'HACER', 'FOLIO', 'DUELO', 'EXTRA', 'GUSTO', 'PLUMA', 'YERNO', 'RUIDO',
+  'ROBOT', 'FALDA', 'HACIA', 'BEBER', 'YUNTA', 'CEBRA', 'MORAL', 'FIRMA', 'CLIMA', 'FLORO',
+  'LINCE', 'FIRME', 'LUZCA', 'TIGRE', 'TIBIO', 'RINDE', 'DURAR', 'VALER', 'BURLA', 'GRITA',
+  'BANDA', 'TENOR', 'RUIDO', 'CONDE', 'TURNO', 'PODER', 'VELAR', 'BROTE', 'TALLA', 'RADIO',
+  'SABER', 'PRISA', 'JALEO', 'TINTE', 'SODIO', 'MOLER', 'CIRCO', 'COMER', 'FLACO', 'GRATA',
+  'TURCO', 'MIMAR', 'CLAVE', 'GRUPO', 'VUELA', 'JUGAR', 'SILLA', 'PILAR', 'MONTA', 'ANCHO',
+  'LLAMA', 'FRITO', 'HELAR', 'PLUMA', 'HUMOR', 'CERDO', 'RUEDA', 'FIRME', 'TALLO', 'HORNO',
+  'FUGAS', 'BORDE', 'PESTO', 'RONCO', 'BESAR', 'PAREO', 'AGUJA', 'CLIMA', 'FUEGO', 'VELAR',
+  'TORRE', 'BICHO', 'PLATA', 'PONER', 'FONDO', 'COSTA', 'FLORA', 'MUDAR', 'FLACO', 'CENIZ',
+  'RUMOR', 'TRAER', 'DOLOR', 'FRESA', 'BRISA', 'PIANO', 'FIRMA', 'FONDA', 'DUCHA', 'BALSA',
+  'PESTE', 'MOCHO', 'BRUTO', 'FINCA', 'RADIO', 'POLEO', 'OSADO', 'FUSIL', 'CEBRA', 'CORTE',
+  'TURNO', 'CORVO', 'BROTE', 'ZORRO', 'MOVER', 'VITRO', 'RUEDA', 'MOLER', 'PERRO', 'SALDO',
+  'METRO', 'BORDE', 'TERCO', 'MIEDO', 'COSTA', 'FELIZ', 'CLIMA', 'VELON', 'GORRO', 'SUAVE',
+  'PIEZA', 'IDEAL', 'HUESO', 'NASAL', 'GRASA', 'ROBAR', 'TALON', 'FONDO', 'GORRA', 'NUEVO',
+  'UNION', 'MUECA', 'FALLO', 'CANAL', 'NIVEL', 'BAJAR', 'FALDA', 'SILLA', 'ROMBO', 'COCHE',
+  'HERIR', 'RONDA', 'BERRO', 'PANAL', 'CRUDA', 'PAREO', 'COMER', 'PODER', 'BROTE', 'VIDRIO',
+  'CLIMA', 'BALSA', 'HORNO', 'BOLSA', 'RUEDA', 'VIEJA', 'GOLPE', 'TECLA', 'FONDO', 'GAFAS',
+  'TURNO',]; 
 
 function App() {
   const [pantallaActual, setPantallaActual] = useState('intro');
@@ -79,6 +124,7 @@ function App() {
     const nuevosIntentos = [...intentos];
     nuevosIntentos[intentoActual] = nuevoIntento;
     setIntentos(nuevosIntentos);
+
   
     if (inputPalabra === palabraSecreta) {
       if (modoDeJuego === 'unJugador') {
@@ -113,14 +159,17 @@ function App() {
       if (modoDeJuego === 'unJugador') {
         setFallos(fallos + 1);
         if (fallos + 1 >= 3) {
+          console.log(fallos)
           alert('¡Has perdido el juego!');
           setPantallaActual('intro');
           resetGame();
+          
           return;
         }
         alert(`¡Se acabaron los intentos! La palabra era ${palabraSecreta}.`);
       } else {
         alert(`¡Se acabaron los intentos! La palabra era ${palabraSecreta}.`);
+
       }
       resetRound();
     } else {
@@ -142,8 +191,20 @@ function App() {
     if (modoDeJuego === 'unJugador') {
       // Si se pasa el tiempo, sumará un fallo
       alert(`¡Se acabó el tiempo! Sumas un fallo. La palabra escondida era ${palabraSecreta}`);
-      setFallos(fallos + 1)
-      resetRound();
+      
+      setFallos(prevFallos => {
+        const nuevosFallos = prevFallos + 1;
+        if (nuevosFallos >= 3) {
+          console.log('has perdido por tiempo');
+          alert('¡Has perdido el juego por tiempo!');
+          setPantallaActual('intro');
+          resetGame();
+          return nuevosFallos;
+        }
+        
+        resetRound();
+        return nuevosFallos;
+      });
     } else {
       // En modo dos jugadores, se cambia el turno
       alert(`¡Se acabó el tiempo! Turno del siguiente jugador.`);
