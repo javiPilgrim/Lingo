@@ -15,7 +15,8 @@ function App() {
   const [mostrarPopup, setMostrarPopup] = useState(false);
   const [mensajePopup, setMensajePopup] = useState('');
   const [mostrarInstrucciones, setMostrarInstrucciones] = useState(false);
-  
+  const [tiempoRestante, setTiempoRestante] = useState(15);
+  const [juegoActivo, setJuegoActivo] = useState(false);
   const [modoDeJuego, setModoDeJuego] = useState(''); // Nuevo estado para el modo de juego
   const [aciertos, setAciertos] = useState(0);  // Contador de aciertos para un jugador
   const [fallos, setFallos] = useState(0);      // Contador de fallos para un jugador
@@ -40,6 +41,19 @@ function App() {
       return () => clearTimeout(timer);
     }
   }, [mostrarPopup, audio]);
+
+  useEffect(() => {
+    let timer;
+    if (juegoActivo && tiempoRestante > 0 && intentoActual < maxIntentos) {
+      timer = setInterval(() => {
+        setTiempoRestante(prev => prev - 1);
+      }, 1000);
+    } else if (tiempoRestante === 0) {
+      handleTimeOut(); // Manejar el timeout
+    }
+
+    return () => clearInterval(timer);
+  }, [tiempoRestante, intentoActual, palabraSecreta, juegoActivo]);
 
   const handleInputChange = (e) => {
     setInputPalabra(e.target.value.toUpperCase());
@@ -117,16 +131,32 @@ function App() {
     }
   
     setInputPalabra('');
+    setTiempoRestante(15);
   };
 
   const cambiarTurno = () => {
     setJugadorActual(jugadorActual === 1 ? 2 : 1);
   };
 
+  const handleTimeOut = () => {
+    if (modoDeJuego === 'unJugador') {
+      // Si se pasa el tiempo, sumará un fallo
+      alert(`¡Se acabó el tiempo! Sumas un fallo. La palabra escondida era ${palabraSecreta}`);
+      setFallos(fallos + 1)
+      resetRound();
+    } else {
+      // En modo dos jugadores, se cambia el turno
+      alert(`¡Se acabó el tiempo! Turno del siguiente jugador.`);
+      cambiarTurno();
+      setTiempoRestante(15)
+    }
+  };
+
   const resetRound = () => {
     setIntentos(Array(5).fill(Array(5).fill({ letra: '', estado: '' })));
     setIntentoActual(0);
     setPalabraSecreta(palabras[Math.floor(Math.random() * palabras.length)]);
+    setTiempoRestante(15);
     if (modoDeJuego === 'dosJugadores') {
       cambiarTurno();
     }
@@ -137,6 +167,13 @@ function App() {
     setAciertos(0); // Reiniciar aciertos
     setFallos(0);   // Reiniciar fallos
     resetRound();
+    setJuegoActivo(false); 
+  };
+
+  const startGame = (modo) => {
+    setModoDeJuego(modo);
+    setPantallaActual('juego');
+    setJuegoActivo(true); // Activa el juego
   };
 
   const renderPalabraSecreta = () => {
@@ -193,6 +230,11 @@ function App() {
         <h2 className="titulo">La Palabra Escondida</h2>
         {renderPalabraSecreta()}
 
+        {/* Mostrar el temporizador */}
+        <div className="temporizador">
+          <h3>Tiempo restante: {tiempoRestante} segundos</h3>
+        </div>
+
         <div className="intentos">
           <h3 className="titulo">Intentos</h3>
           {intentos.map((intento, idx) => (
@@ -232,8 +274,8 @@ function App() {
         <h1 className="titulo-3d">Bienvenido a LINGO.</h1>
         <h2 className="subtitulo-3d">El juego de la Palabra Escondida</h2>
         <div className="botones-intro">
-          <button className="boton-intro" onClick={() => handlePantallaIntro('unJugador')}>Un Jugador</button>
-          <button className="boton-intro" onClick={() => handlePantallaIntro('dosJugadores')}>Dos Jugadores</button>
+          <button className="boton-intro" onClick={() => startGame('unJugador')}>Un Jugador</button>
+          <button className="boton-intro" onClick={() => startGame('dosJugadores')}>Dos Jugadores</button>
           <button className="boton-intro" onClick={() => setMostrarInstrucciones(true)}>Ver Instrucciones</button>
         </div>
   
@@ -242,10 +284,15 @@ function App() {
             <h2>Instrucciones del Juego</h2>
             <p>
               <strong>Objetivo:</strong> El objetivo del juego es adivinar la palabra secreta en un máximo de 5 intentos.</p>
+              <p><strong>Modalidad "Un Jugador".</strong></p>
+              <p>El jugador deberá introducir su intento de palabra de cinco letras. Si una letra está en la
+              posición correcta, se marcará en verde; si está en la palabra pero en la posición
+              incorrecta, se marcará en amarillo; y si no está en la palabra, no se marcará. El jugador tendrá solo 15 segundos para introducir su intento ya que si no lo hace es ese tiempo sumará un fallo y pasará a un nuevo panel. Si el jugador resuelve la palabra en cinco intentos sumará un acierto y si no sumará un fallo. Ganará el jugeo si suma tres aciertos y lo perderá si suma tres fallos.
+            </p>
               <p><strong>Modalidad "Dos Jugadores".</strong></p>
               <p>Cada jugador toma turnos para ingresar una palabra de 5 letras. Si una letra está en la
               posición correcta, se marcará en verde; si está en la palabra pero en la posición
-              incorrecta, se marcará en amarillo; y si no está en la palabra, no se marcará. Los jugadores irán intentando resolver la palabra en su turno. Puntuará el jugador que consiga resolver la palabra. En caso de que ninguno de los jugadores resuelva la palabra en cinco intentos se desvelará la palabra y se pasará a un nuevo panel con una nueva palabra oculta. El jugador que llegue a los tres puntos gana la partida.
+              incorrecta, se marcará en amarillo; y si no está en la palabra, no se marcará. Los jugadores irán intentando resolver la palabra en su turno. Cada jugador tendrá solo 15 segundos para introducir su intento.Puntuará el jugador que consiga resolver la palabra. En caso de que ninguno de los jugadores resuelva la palabra en cinco intentos se desvelará la palabra y se pasará a un nuevo panel con una nueva palabra oculta. El jugador que llegue a los tres puntos gana la partida. 
             </p>
             <button onClick={() => setMostrarInstrucciones(false)}>Cerrar Instrucciones</button>
           </div>
@@ -258,3 +305,4 @@ function App() {
 }
 
 export default App;
+

@@ -12,5 +12,3 @@ const Popup = ({ mensaje, mostrar, imagen }) => {
 };
 
 export default Popup;
-
-
