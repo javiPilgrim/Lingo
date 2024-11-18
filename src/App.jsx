@@ -60,7 +60,7 @@ function App() {
   const [mostrarPopup, setMostrarPopup] = useState(false);
   const [mensajePopup, setMensajePopup] = useState('');
   const [mostrarInstrucciones, setMostrarInstrucciones] = useState(false);
-  const [tiempoRestante, setTiempoRestante] = useState(15);
+  const [tiempoRestante, setTiempoRestante] = useState(25);
   const [juegoActivo, setJuegoActivo] = useState(false);
   const [modoDeJuego, setModoDeJuego] = useState(''); // Nuevo estado para el modo de juego
   const [aciertos, setAciertos] = useState(0);  // Contador de aciertos para un jugador
