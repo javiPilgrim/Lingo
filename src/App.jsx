@@ -60,7 +60,7 @@ function App() {
   const [mostrarPopup, setMostrarPopup] = useState(false);
   const [mensajePopup, setMensajePopup] = useState('');
   const [mostrarInstrucciones, setMostrarInstrucciones] = useState(false);
-  const [tiempoRestante, setTiempoRestante] = useState(25);
+  const [tiempoRestante, setTiempoRestante] = useState(30);
   const [juegoActivo, setJuegoActivo] = useState(false);
   const [modoDeJuego, setModoDeJuego] = useState(''); // Nuevo estado para el modo de juego
   const [aciertos, setAciertos] = useState(0);  // Contador de aciertos para un jugador
@@ -180,7 +180,7 @@ function App() {
     }
   
     setInputPalabra('');
-    setTiempoRestante(15);
+    setTiempoRestante(30);
   };
 
   const cambiarTurno = () => {
@@ -209,7 +209,7 @@ function App() {
       // En modo dos jugadores, se cambia el turno
       alert(`¡Se acabó el tiempo! Turno del siguiente jugador.`);
       cambiarTurno();
-      setTiempoRestante(15)
+      setTiempoRestante(30)
     }
   };
 
@@ -217,7 +217,7 @@ function App() {
     setIntentos(Array(5).fill(Array(5).fill({ letra: '', estado: '' })));
     setIntentoActual(0);
     setPalabraSecreta(palabras[Math.floor(Math.random() * palabras.length)]);
-    setTiempoRestante(15);
+    setTiempoRestante(30);
     if (modoDeJuego === 'dosJugadores') {
       cambiarTurno();
     }
